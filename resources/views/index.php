@@ -107,7 +107,7 @@
 		app.controller('usersCtrl', function($scope, $http) {
 
 			/* The -R- part */
-			$http.get("http://localhost/read-users")
+			$http.get("/read-users")
 			.success(function(response) {
 				$scope.users = response;
 			});
@@ -116,8 +116,8 @@
 			/* The -C- and -U- part */
 			$scope.save = function(modalstate,user_id){
 				switch(modalstate){
-					case 'add': var url = "http://localhost/create-user"; break;
-					case 'edit': var url = "http://localhost/edit-user/"+user_id; break;
+					case 'add': var url = "/create-user"; break;
+					case 'edit': var url = "/edit-user/"+user_id; break;
 					default: break;
 				}
 				$http({
@@ -146,7 +146,7 @@
 			$scope.confirmDelete = function(id){
 				var isOkDelete = confirm('Is it ok to delete this?');
 				if(isOkDelete){
-					$http.post('http://localhost/delete-user/' + id, {id:id}).
+					$http.post('/delete-user/' + id, {id:id}).
 					success(function(data){
 						location.reload();
 					}).
@@ -175,7 +175,7 @@
 					case 'edit':
 						$scope.state = "User Detail";
 						$scope.user_id = id;
-						$http.get("http://localhost/read-user/" + id)
+						$http.get("/read-user/" + id)
 						.success(function(response) {
 							console.log(response);
 							$scope.formData = response;
